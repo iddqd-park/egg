@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collision Hitbox Test</title>
+    <style>
+        body {
+            background-color: #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: sans-serif;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            background-color: #87CEEB; /* Sky Blue like game */
+            margin-top: 20px;
+        }
+        .info {
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Collision Hitbox Test</h1>
+    <div class="info">
+        <p>Edit <code>config.js</code> to change hitbox sizes.</p>
+        <p>Red Box = Hitbox</p>
+    </div>
+    <canvas id="testCanvas" width="800" height="400"></canvas>
+
+    <script src="config.js"></script>
+    <script>
+        const canvas = document.getElementById('testCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const IMAGES = {};
+        let imagesLoaded = 0;
+        const imageSources = {
+            basket: 'images/basket.png',
+            egg: 'images/egg.png',
+            bomb: 'images/bomb.png',
+            magnet: 'images/magnet.png'
+        };
+        const totalImages = Object.keys(imageSources).length;
+
+        function loadImages(callback) {
+            for (let key in imageSources) {
+                IMAGES[key] = new Image();
+                IMAGES[key].src = imageSources[key];
+                IMAGES[key].onload = () => {
+                    imagesLoaded++;
+                    if (imagesLoaded === totalImages) {
+                        callback();
+                    }
+                };
+            }
+        }
+
+        function drawImageAspect(ctx, img, x, y, w, h) {
+            if (!img.complete || img.naturalWidth === 0) return;
+            let scale = Math.min(w / img.naturalWidth, h / img.naturalHeight);
+            let nw = img.naturalWidth * scale;
+            let nh = img.naturalHeight * scale;
+            let nx = x + (w - nw) / 2;
+            let ny = y + (h - nh) / 2;
+            ctx.drawImage(img, nx, ny, nw, nh);
+        }
+
+        function drawHitbox(x, y, w, h, config) {
+            let hbW = w * config.width;
+            let hbH = h * config.height;
+            let hbX = x + (w - hbW) / 2;
+            let hbY = y + (h - hbH) / 2;
+            
+            ctx.strokeStyle = "red";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(hbX, hbY, hbW, hbH);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Player (Basket)
+            let pX = 100, pY = 150, pW = 100, pH = 100;
+            drawImageAspect(ctx, IMAGES.basket, pX, pY, pW, pH);
+            drawHitbox(pX, pY, pW, pH, COLLISION_CONFIG.player);
+            ctx.fillStyle = "black";
+            ctx.font = "20px Arial";
+            ctx.fillText("Player", pX + 20, pY + 120);
+
+            // 2. Egg
+            let eX = 300, eY = 150, eW = 80, eH = 80;
+            drawImageAspect(ctx, IMAGES.egg, eX, eY, eW, eH);
+            drawHitbox(eX, eY, eW, eH, COLLISION_CONFIG.egg);
+            ctx.fillText("Egg", eX + 20, eY + 120);
+
+            // 3. Item (Bomb)
+            let bX = 500, bY = 150, bW = 60, bH = 60;
+            drawImageAspect(ctx, IMAGES.bomb, bX, bY, bW, bH);
+            drawHitbox(bX, bY, bW, bH, COLLISION_CONFIG.item);
+            ctx.fillText("Bomb", bX + 10, bY + 100);
+
+             // 4. Item (Magnet)
+             let mX = 650, mY = 150, mW = 60, mH = 60;
+            drawImageAspect(ctx, IMAGES.magnet, mX, mY, mW, mH);
+            drawHitbox(mX, mY, mW, mH, COLLISION_CONFIG.item);
+            ctx.fillText("Magnet", mX + 0, mY + 100);
+        }
+
+        window.onload = () => {
+            loadImages(() => {
+                draw();
+            });
+        };
+    </script>
+</body>
+</html>

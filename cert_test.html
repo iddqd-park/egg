@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Layout Test</title>
+    <style>
+        body {
+            background-color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            color: white;
+            font-family: sans-serif;
+        }
+        canvas {
+            border: 2px solid white;
+            max-width: 90%;
+            max-height: 80vh;
+        }
+    </style>
+</head>
+<body>
+    <h1>Certificate Layout Test</h1>
+    <canvas id="testCanvas"></canvas>
+    <p>Edit <code>config.js</code> and refresh to see changes.</p>
+
+    <script src="config.js"></script>
+    <script>
+        window.onload = function() {
+            const canvas = document.getElementById('testCanvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            img.src = "images/certi.jpg";
+
+            img.onload = function() {
+                const w = img.width;
+                const h = img.height;
+                canvas.width = w;
+                canvas.height = h;
+
+                // Draw Background
+                ctx.drawImage(img, 0, 0, w, h);
+
+                // Dummy Data
+                const name = "홍길동";
+                const score = 12345;
+                const date = new Date().toLocaleDateString();
+
+                // Draw Text using Config
+                ctx.textAlign = "center";
+
+                // Name
+                ctx.fillStyle = CERT_CONFIG.name.color;
+                ctx.font = CERT_CONFIG.name.fontSize;
+                ctx.fillText(name, w * CERT_CONFIG.name.x, h * CERT_CONFIG.name.y);
+
+                // Score
+                ctx.fillStyle = CERT_CONFIG.score.color;
+                ctx.font = CERT_CONFIG.score.fontSize;
+                ctx.fillText(`${score}`, w * CERT_CONFIG.score.x, h * CERT_CONFIG.score.y);
+
+                // Date
+                ctx.fillStyle = CERT_CONFIG.date.color;
+                ctx.font = CERT_CONFIG.date.fontSize;
+                ctx.fillText(date, w * CERT_CONFIG.date.x, h * CERT_CONFIG.date.y);
+            };
+        };
+    </script>
+</body>
+</html>
