@@ -51,19 +51,23 @@
                 <h2>게임 종료!</h2>
                 <p class="fs-4">최종 점수: <span id="finalScore" class="text-warning fw-bold">0</span></p>
                 
-                <div class="mb-3 w-100" style="max-width: 300px;">
-                    <input type="text" id="playerName" class="form-control text-center" placeholder="이름/닉네임 입력 (인증서용)" maxlength="8">
+                <div class="cert-group">
+                    <div class="w-100" style="max-width: 300px; margin: 0 auto;">
+                        <input type="text" id="playerName" class="form-control text-center" placeholder="이름/닉네임 입력 (인증서용)" maxlength="8">
+                    </div>
+                    
+                    <button class="btn btn-primary mt-3 w-100" style="max-width: 300px;" onclick="generateCertificate()">📜 인증서 만들기</button>
                 </div>
-                
-                <button class="btn btn-primary mb-4 w-100" style="max-width: 300px;" onclick="generateCertificate()">📜 인증서 만들기</button>
-                <button class="btn btn-outline-light w-100" style="max-width: 300px;" onclick="resetGame()">🔄 다시 하기</button>
+                <button class="btn btn-light w-100 fw-bold mt-3" style="max-width: 300px; background-color: #ffffff; border-color: #ffffff;" onclick="resetGame()">🔄 다시 하기</button>
+                <a href="https://iddqd.kr" class="btn btn-dark w-100 mt-3" style="max-width: 300px;" target="_blank">iddqd.kr</a>
             </div>
 
             <div id="certUI" class="hidden w-100 d-flex flex-column align-items-center">
                 <img id="cert-preview" alt="인증서 미리보기">
-                <p id="mobileSaveHint" class="hidden text-white mt-2 fs-5">이미지를 꾹 눌러서 저장하세요!</p>
-                <a id="downloadLink" class="btn btn-success mt-2 w-100" style="max-width: 300px;" download="egg_certificate.png">💾 이미지 저장하기</a>
-                <button class="btn btn-outline-light mt-4 w-100" style="max-width: 300px;" onclick="resetGame()">🔄 다시 하기</button>
+                <p id="mobileSaveHint" class="hidden text-white mt-3 fs-5">이미지를 꾹 눌러서 저장하세요!</p>
+                <a id="downloadLink" class="btn btn-success mt-3 w-100" style="max-width: 300px;" download="egg_certificate.png">💾 이미지 저장하기</a>
+                <button class="btn btn-light mt-3 w-100 fw-bold" style="max-width: 300px; background-color: #ffffff; border-color: #ffffff;" onclick="resetGame()">🔄 다시 하기</button>
+                <a href="https://iddqd.kr" class="btn btn-dark w-100 mt-3" style="max-width: 300px;" target="_blank">iddqd.kr</a>
             </div>
             
             <!-- Hidden canvas for certificate generation -->

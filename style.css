@@ -259,3 +259,17 @@ h2 {
     font-size: 20px;
     cursor: pointer;
 }
+
+/* Certificate Grouping */
+.cert-group {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 340px; /* Slightly wider than the buttons */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
