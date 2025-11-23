@@ -316,7 +316,9 @@ function spawnEgg() {
         codeFarm: `${farm} ${eggData.text}`,
         speed: (3 + Math.random() * 2) * speedMultiplier,
         vx: 0, vy: 0, // For physics
-        rotation: (Math.random() - 0.5) * 0.2
+        rotation: 0,
+        wobblePhase: Math.random() * Math.PI * 2,
+        wobbleSpeed: 0.1 + Math.random() * 0.05
     });
 }
 
@@ -415,6 +417,10 @@ function update() {
     // Update Eggs
     for (let i = eggs.length - 1; i >= 0; i--) {
         let egg = eggs[i];
+
+        // Wobble Animation
+        egg.wobblePhase += egg.wobbleSpeed;
+        egg.rotation = Math.sin(egg.wobblePhase) * 0.2;
 
         if (magnetTimer > 0) {
             // Magnet Logic: Only X acceleration, no Y change
@@ -830,6 +836,19 @@ function generateCertificate() {
 
         // Switch UI
         document.getElementById('gameOverUI').classList.add('hidden');
+        // Mobile Check
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const downloadLink = document.getElementById('downloadLink');
+        const mobileSaveHint = document.getElementById('mobileSaveHint');
+
+        if (isMobile) {
+            downloadLink.classList.add('hidden');
+            mobileSaveHint.classList.remove('hidden');
+        } else {
+            downloadLink.classList.remove('hidden');
+            mobileSaveHint.classList.add('hidden');
+        }
+
         document.getElementById('certUI').classList.remove('hidden');
 
         // 인증서 화면도 맨 위에서 시작
