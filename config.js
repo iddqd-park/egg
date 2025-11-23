@@ -1,18 +1,18 @@
 const CERT_CONFIG = {
     name: {
-        x: 0.5,      // 50% width (Center)
+        x: 0.45,      // 50% width (Center)
         y: 0.69,    // 70.5% height
         fontSize: "bold 80px arial",
         color: "#000"
     },
     score: {
-        x: 0.5,
+        x: 0.45,
         y: 0.745,    // 77.5% height
         fontSize: "bold 80px arial",
         color: "#000"
     },
     date: {
-        x: 0.5,
+        x: 0.45,
         y: 0.796,    // 84.5% height
         fontSize: "bold 80px arial",
         color: "#000"

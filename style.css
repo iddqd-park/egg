@@ -262,14 +262,65 @@ h2 {
 
 /* Certificate Grouping */
 .cert-group {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    padding: 24px 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    /* Increased spacing */
     width: 100%;
-    max-width: 340px; /* Slightly wider than the buttons */
+    max-width: 340px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* 그룹 안 제목/설명 텍스트 */
+.cert-group-title {
+    font-family: 'Jua', sans-serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.cert-group-sub {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-bottom: 12px;
+}
+
+/* 그룹 안 입력창/버튼 약간 더 또렷하게 */
+.cert-group .form-control {
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+}
+
+.cert-group .btn {
+    border-radius: 999px;
+}
+
+/* Action Buttons Group */
+.action-group {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    /* Consistent spacing between buttons */
+}
+
+.action-group .btn {
+    margin: 0 !important;
+    /* Reset margins to use gap */
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.action-group .btn:active {
+    transform: scale(0.98);
 }
