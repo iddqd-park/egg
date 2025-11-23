@@ -811,7 +811,7 @@ function generateCertificate() {
         cCtx.drawImage(certImg, 0, 0, w, h);
 
         // Draw Text
-        cCtx.textAlign = "center";
+        cCtx.textAlign = "left";
 
         // Name
         cCtx.fillStyle = CERT_CONFIG.name.color;
